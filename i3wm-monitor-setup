@@ -1,0 +1,50 @@
+#!/bin/bash
+
+MONITOR_LEFT="DP-1-2"
+MONITOR_RIGHT="DP-1-3"
+MONITOR_INTERNAL="eDP-1"
+
+FILENAME="monitor.dat"
+FILEPATH="$PWD/$FILENAME"
+
+if test ! -f $FILEPATH; then
+	echo "ALL" > $FILEPATH
+fi
+
+
+monitor_mode=`cat $FILEPATH` # ALL, EXTERNAL, INTERNAL, CLONES
+
+case $monitor_mode in
+	ALL) # Extend all displays
+		xrandr --output $MONITOR_LEFT --auto 
+		xrandr --output $MONITOR_RIGHT --auto 
+		xrandr --output $MONITOR_INTERNAL --auto
+		xrandr --output $MONITOR_INTERNAL --right-of $MONITOR_RIGHT
+		xrandr --output $MONITOR_LEFT --left-of $MONITOR_RIGHT
+		echo "EXTERNAL" > $FILEPATH
+	;;
+	
+	EXTERNAL) # External displays only
+		xrandr --output $MONITOR_LEFT --auto 
+		xrandr --output $MONITOR_RIGHT --auto 
+		xrandr --output $MONITOR_INTERNAL --off
+		xrandr --output $MONITOR_LEFT --left-of $MONITOR_RIGHT
+		echo "CLONES" > $FILEPATH
+	;;
+
+	CLONES) # Clone displays
+		xrandr --output $MONITOR_LEFT --auto
+		xrandr --output $MONITOR_RIGHT --auto 
+		xrandr --output $MONITOR_INTERNAL --auto
+		xrandr --output $MONITOR_LEFT --same-as $MONITOR_INTERNAL
+		xrandr --output $MONITOR_RIGHT --same-as $MONITOR_INTERNAL
+		echo "INTERNAL" > $FILEPATH
+	;;
+
+	*) # Internal display only
+		xrandr --output $MONITOR_LEFT --off 
+		xrandr --output $MONITOR_RIGHT --off 
+		xrandr --output $MONITOR_INTERNAL --auto
+		echo "ALL" > $FILEPATH
+	;;
+esac
