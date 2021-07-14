@@ -161,9 +161,11 @@ bindsym $mod+n move workspace to output down
 
 # Bind flameshot to printscreen
 bindsym $mod+p exec flameshot gui
+bindsym Print exec flameshot gui
 
 # Enter mode_system
 bindsym $mod+Pause mode "$mode_system"
+bindsym $mod+Shift+p mode "$mode_display"
 
 # Rename workspace on-the-fly
 bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
@@ -268,6 +270,19 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
+}
+
+# This mode allows one to control the screen layout, given the scripts exist
+# To generate these scripts, use arandr and extract. Then move in this folder and chmod 777
+set $mode_display Display (e) External Only, (i) Internal Only, (a) All
+mode "$mode_display" {
+	bindsym e exec --no-startup-id ~/.config/i3/display-external.sh, mode "default"
+	bindsym a exec --no-startup-id ~/.config/i3/display-all.sh, mode "default"
+	bindsym i exec --no-startup-id ~/.config/i3/display-internal.sh, mode "default"
+ 
+        # back to normal: Enter or Escape or $mod+r
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 # This mode allows one to control the power of the device
