@@ -13,15 +13,15 @@
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
+set $ws1 "1: TKS"
+set $ws2 "2: Web"
+set $ws3 "3: Chat"
+set $ws4 "4: Code"
+set $ws5 "5: Local"
+set $ws6 "6: Server"
+set $ws7 "7: Meeting"
+set $ws8 "8: SQL"
+set $ws9 "9: Audio"
 set $ws10 "10"
 
 ####################################################################################################################################
@@ -274,11 +274,12 @@ mode "resize" {
 
 # This mode allows one to control the screen layout, given the scripts exist
 # To generate these scripts, use arandr and extract. Then move in this folder and chmod 777
-set $mode_display Display (e) External Only, (i) Internal Only, (a) All
+set $mode_display Display (e) External Only, (i) Internal Only, (h) Home mode, (a) All
 mode "$mode_display" {
 	bindsym e exec --no-startup-id ~/.config/i3/display-external.sh, mode "default"
 	bindsym a exec --no-startup-id ~/.config/i3/display-all.sh, mode "default"
 	bindsym i exec --no-startup-id ~/.config/i3/display-internal.sh, mode "default"
+	bindsym h exec --no-startup-id ~/.config/i3/display-home.sh, mode "default"
  
         # back to normal: Enter or Escape or $mod+r
 	bindsym Return mode "default"
