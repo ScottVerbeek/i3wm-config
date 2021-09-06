@@ -136,7 +136,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # Reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -179,6 +179,9 @@ bindsym Pause exec i3lock --color=300a24
 
 # Open firefox
 bindsym $mod+Shift+f exec firefox
+
+# Open chromefirefox
+bindsym $mod+Shift+c exec google-chrome
 
 # Open calculator
 bindsym XF86Calculator exec gnome-calculator
