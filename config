@@ -213,6 +213,9 @@ bindsym $mod+XF86AudioRaiseVolume exec "dbus-send --print-reply --dest=org.mpris
 # is used in the bar {} block below.
 font pango:ubuntu 10
 
+# Border size
+for_window [class=".*"] border pixel 1
+
 # Set a background image using feh
 # Note that feh will need to be installed
 exec --no-startup-id feh --bg-fill ~/Pictures/ubuntu-doge.png
